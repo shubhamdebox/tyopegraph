@@ -12,8 +12,12 @@ import {
   FacebookLoginButton,
 } from "react-social-login-buttons";
 
+import * as queryString from 'query-string';
+
+
+
 const REDIRECT_URI = "http://localhost:3000/account/login";
-const REDIRECT_URI2 = "http://localhost:3000/loginn2";
+
 
 const Button = () => {
   const [provider, setProvider] = useState("");
@@ -32,6 +36,18 @@ const Button = () => {
   }, []);
 
   const onLogout = useCallback(() => {}, []);
+
+
+  const stringifiedParams = queryString.stringify({
+    client_id: "524305576404113",
+    redirect_uri: 'http://localhost:3000/fb',
+    scope: ['email', 'public_profile'].join(','), // comma seperated string
+    response_type: 'code',
+    auth_type: 'rerequest',
+    display: 'popup',
+  });
+  
+  const facebookLoginUrl = `https://www.facebook.com/v4.0/dialog/oauth?${stringifiedParams}`;
 
   return (
     <div className={`App ${provider && profile ? "hide" : ""}`}>
@@ -54,7 +70,7 @@ const Button = () => {
         <GoogleLoginButton />
       </LoginSocialGoogle>
 
-      <LoginSocialLinkedin
+      {/* <LoginSocialLinkedin
         client_id={"78d8hriyw21ckg"}
         client_secret={"5IxoFanSYWtgycNl"}
         redirect_uri={REDIRECT_URI2}
@@ -69,7 +85,7 @@ const Button = () => {
         }}
       >
         <LinkedInLoginButton />
-      </LoginSocialLinkedin>
+      </LoginSocialLinkedin> */}
 
       <LoginSocialFacebook
           appId={"524305576404113"}
@@ -89,6 +105,12 @@ const Button = () => {
         >
           <FacebookLoginButton />
         </LoginSocialFacebook>
+
+
+        <a href={facebookLoginUrl}>
+    Login with Facebook
+  </a>
+
     </div>
   );
 };
