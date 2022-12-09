@@ -56,7 +56,7 @@ const Button = () => {
 
   const FacebookParams = queryString.stringify({
     client_id: "524305576404113",
-    redirect_uri: "http://localhost:3000/loginn2",
+    redirect_uri: "https://cheerful-dodol-9da0e8.netlify.app/loginn2",
   });
   
   const FacebookUri = `https://www.facebook.com/v15.0/dialog/oauth?${FacebookParams}`;
@@ -65,19 +65,6 @@ const Button = () => {
   console.log(`The code is: ${urlParams.code}`);
 
   let codes = urlParams.code;
-
-  const openFacebookDialog = async () => {
-    const APP_ID = "524305576404113";
-    const rurl = "https://cheerful-dodol-9da0e8.netlify.app/loginn2";
-    const qs =  queryString.stringify({
-      client_id: APP_ID,
-      redirect_uri: rurl,
-    });
-
-    const api = `https://www.facebook.com/v15.0/dialog/oauth?${qs}`;
-
-    await fetch(api, {method: "GET"})
-  }
 
   // async function getAccessTokenFromCode() {
   //   const { data } = await axios({
@@ -158,7 +145,7 @@ const Button = () => {
 
       <a href={LinkendinUri}>Login with Linkendin</a>
       <br></br>
-      <p onClick={openFacebookDialog}>Login with Facebook</p>
+      <a href={FacebookUri}>Login with Facebook</a>
     </div>
   );
 };
