@@ -66,6 +66,19 @@ const Button = () => {
 
   let codes = urlParams.code;
 
+  const openFacebookDialog = async () => {
+    const APP_ID = "524305576404113";
+    const rurl = "https://cheerful-dodol-9da0e8.netlify.app/loginn2";
+    const qs =  queryString.stringify({
+      client_id: APP_ID,
+      redirect_uri: rurl,
+    });
+
+    const api = `https://www.facebook.com/v15.0/dialog/oauth?${qs}`;
+
+    await fetch(api, {method: "GET"})
+  }
+
   // async function getAccessTokenFromCode() {
   //   const { data } = await axios({
   //     url: `https://www.linkedin.com/oauth/v2/accessToken`,
@@ -145,7 +158,7 @@ const Button = () => {
 
       <a href={LinkendinUri}>Login with Linkendin</a>
       <br></br>
-      <a href={FacebookUri}>Login with Facebook</a>
+      <p onClick={openFacebookDialog}>Login with Facebook</p>
     </div>
   );
 };
