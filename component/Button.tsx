@@ -57,6 +57,8 @@ const Button = () => {
   const FacebookParams = queryString.stringify({
     client_id: "524305576404113",
     redirect_uri: "https://cheerful-dodol-9da0e8.netlify.app/loginn2",
+    auth_type : "rerequest",
+    scope : "email"
   });
   
   const FacebookUri = `https://www.facebook.com/v15.0/dialog/oauth?${FacebookParams}`;
@@ -135,6 +137,7 @@ const Button = () => {
         onResolve={({ provider, data }: IResolveParams) => {
           setProvider(provider);
           setProfile(data);
+          console.log(profile);
         }}
         onReject={(err) => {
           console.log(err);
